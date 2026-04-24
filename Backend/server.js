@@ -8,6 +8,7 @@ const ENV = require("./Helper/ENV/environment")
 
 const authRoutes = require("./routes/authRoutes");
 const taskRoutes = require("./routes/taskRoutes")
+const adminRoutes = require("./routes/adminRoutes")
 const dotenv = require("dotenv");
 dotenv.config();
 
@@ -29,7 +30,7 @@ app.use((req,res,next)=>{
 })
 
 io.on("connection",(socket)=>{
-console.log("User Connected", socket.id);
+console.log("User Connected Socket Io", socket.id);
 socket.on("Disconnected", ()=>{
     console.log("User Disconnected", socket.id)
 })
@@ -37,7 +38,8 @@ socket.on("Disconnected", ()=>{
 
 
 app.use("/api/auth", authRoutes);
-app.use("/api/task",taskRoutes)
+app.use("/api/task",taskRoutes);
+app.use("/api/user",adminRoutes);
 
 connectdb()
 // app.get("/", (req, res) => {
