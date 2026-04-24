@@ -1,9 +1,10 @@
 const mongoose = require("mongoose")
-
+const ENV = require("../Helper/ENV/environment")
+const querySrting=ENV.MONGO_URI
 
 const connectdb = async () => {
     try {
-        const conn = await mongoose.connect(process.env.MONGO_URI)
+        const conn = await mongoose.connect(querySrting)
         console.log(`MongoDB Connected: ${conn.connection.host}`);
     } catch (error) {
         console.error(error.message);
