@@ -1,16 +1,46 @@
-# React + Vite
+# Task Manager MERN App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A Mern-stack task management system with authentication, OTP verification, role-based access, and real-time updates using Socket.io. 
 
-Currently, two official plugins are available:
+## Tech Stack
+- React.js
+- Node.js
+- Express.js
+- MongoDB
+- Socket.io
+- JWT Authentication
+- Tailwind CSS
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
+- User registration & login
+- OTP email verification (10 min expiry)
+- Resend OTP functionality
+- JWT authentication
+- Role-based access (Admin/User)
+- Task CRUD operations
+- Real-time task updates (Socket.io)
+- Admin user management
 
-## React Compiler
+## Installation
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Backend
+cd Backend
+npm install
+nodemon server.js
 
-## Expanding the ESLint configuration
+### Frontend
+cd Frontend
+npm install  
+npm run dev
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Environment Variables
+
+Create `.env` file:
+
+PORT=5000;
+MONGO_URI="mongodb+srv://iratzaahmad3321_db_user:OapyBacHJ6rJj7C3@cluster0.qaycrm1.mongodb.net/?appName=Cluster0";
+JWT_SECRET="WI2KLO44THBFXG0"
+
+EMAIL_USER="iratzaahmad3321@gmail.com";
+EMAIL_PASS="zwic lfxz zgav gcrt";
+
