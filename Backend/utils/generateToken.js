@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const ENV = require("../Helper/ENV/environment.js")
+const ENV = require("../environment.js")
 
 exports.generateToken = (user)=>{
 return jwt.sign(

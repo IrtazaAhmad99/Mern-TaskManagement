@@ -1,5 +1,5 @@
 const mongoose = require("mongoose")
-const ENV = require("../Helper/ENV/environment")
+const ENV = require("../environment.js")
 const seedAdmin = require("./seeder")
 const querySrting=ENV.MONGO_URI
 

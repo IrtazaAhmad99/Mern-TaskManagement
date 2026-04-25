@@ -3,7 +3,7 @@ const cors = require("cors");
 const Http = require("http")
 const { Server } = require("socket.io");
 const connectdb = require("./DB/connectdb")
-const ENV = require("./Helper/ENV/environment")
+const ENV = require("./environment.js")
 
 
 const authRoutes = require("./routes/authRoutes");
