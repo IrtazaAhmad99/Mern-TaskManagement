@@ -1,14 +1,24 @@
-import './App.css'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Login from "./pages/Login"
+import Signup from "./pages/Signup"
+import Dashbord from "./pages/DashBord"
+import Users from "./pages/Users"
+import VerifyOTP from "./pages/VerifyOTP";
 
 function App() {
  
 
   return (
-    <div className="p-10">
-      <h1 className="text-4xl text-green-500">
-        Tailwind is working
-      </h1>
-    </div>
+    <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Login/>} />
+      <Route path="/signup" element={<Signup/>} />
+      <Route path="/dashbord" element={<Dashbord/>} />
+      <Route path="/users" element={<Users/>} />
+      <Route path="/verify-otp" element={<VerifyOTP/>} />
+
+    </Routes>
+    </BrowserRouter>
   )
 }
 
