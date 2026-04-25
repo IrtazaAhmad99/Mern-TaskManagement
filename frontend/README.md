@@ -44,3 +44,7 @@ JWT_SECRET="WI2KLO44THBFXG0"
 EMAIL_USER="iratzaahmad3321@gmail.com";
 EMAIL_PASS="zwic lfxz zgav gcrt";
 
+##Postman 
+https://team-task-6931.postman.co/workspace/mern-taskManagement~78f31fef-0955-47df-ade9-22b55d7fb853/request/35576763-4fd20b16-3a2b-4739-bf51-ad8d68ba2673?action=share&creator=35576763&ctx=documentation 
+
+
