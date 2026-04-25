@@ -3,7 +3,7 @@ const router = express.Router()
 
 const TaskController = require("../controllers/Task/TaskController.js")
 
-const {protectedRoutes} = require("../middlewares/authMiddleware")
+const {protectedRoutes} = require("../middlewares/authMiddleware.js")
 
 router.use(protectedRoutes)
 

@@ -26,12 +26,12 @@ const Signup = () => {
   const handleSignup = async () => {
     try {
       setLoading(true);
+      const res = await AuthAPI.handleSignup(formik.values);
+      console.log(res)
 
-      const res = await AuthAPI.handleSignup("/auth/signup", form);
+      alert(res.message);
 
-      alert(res.data.message);
-
-      navigate("/verify-otp", { state: { email: form.email } });
+      navigate("/verify-otp", { state: { email: formik.values.email } });
 
     } catch (err) {
       alert(err.response?.data?.message || "Signup failed");

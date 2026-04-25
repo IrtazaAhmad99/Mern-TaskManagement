@@ -4,7 +4,8 @@ import axiosInstance from "../axios"
 class Routes {
     async handleSignup(data) {
         try {
-            const response = await axiosInstance.post("/api/auth/signup", data)
+            const response = await axiosInstance.post("/auth/signup", data)
+            console.log(response)
             return response.data
         } catch (error) {
             console.error("An error occurred:", error);
@@ -13,16 +14,16 @@ class Routes {
     }
     async handleLogin(data) {
         try {
-            const response = await axiosInstance.post("/api/auth/login",FormDataEvent)
+            const response = await axiosInstance.post("/auth/login",data)
             return response.data
         } catch (error) {
             console.error("An error occurred:", error);
             throw error;
         }
     }
-    async verifyOtp(){
+    async verifyOtp(data){
         try {
-            const response = await axiosInstance.post("/api/auth/verify-otp")
+            const response = await axiosInstance.post("/auth/verify-otp",data)
             return response.data
         } catch (error) {
             console.error("An error occurred:", error);
