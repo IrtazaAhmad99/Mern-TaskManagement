@@ -6,45 +6,58 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 
 const VerifyOTP = () => {
-    const navigate = useNavigate();
-    const location = useLocation();
-    const initialValues = {
+   const [loading, setLoading] = useState(false);
+  const [resendLoading, setResendLoading] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const initialValues = {
     otp: "",
   }
-   const validationSchema = Yup.object({
+  const validationSchema = Yup.object({
     otp: Yup.string()
       .length(6, "OTP must be 6 digits")
       .required("OTP is required"),
   });
 
 
-    const email = location.state?.email;
+  const email = location.state?.email;
 
-    
-    const [otp, setOtp] = useState("");
 
-    const handleVerify = async (values) => {
-        try {
-            const res = await AuthAPI.verifyOtp({
-                email,
-                otp: values.otp
-            });
+  const [otp, setOtp] = useState("");
 
-            alert(res?.message);
+  const handleVerify = async (values) => {
+    try {
+      const res = await AuthAPI.verifyOtp({
+        email,
+        otp: values.otp
+      });
 
-            navigate("/"); 
-        } catch (error) {
-            alert(error.res?.data?.message || "OTP failed");
-        }
-    };
-    const formik = useFormik({
-        initialValues,
-        validationSchema,
-        onSubmit: handleVerify,
-      })
-      
-    return (
-        <div className="flex items-center justify-center h-screen bg-gray-100">
+      alert(res?.message);
+
+      navigate("/");
+    } catch (error) {
+      alert(error.res?.data?.message || "OTP failed");
+    }
+  };
+  const handleResend = async () => {
+    try {
+      setResendLoading(true);
+      const res = await AuthAPI.resenddOtp({ email });
+      alert(res?.message);
+    } catch (err) {
+      alert(err.response?.data?.message || "Failed to resend OTP");
+    } finally {
+      setResendLoading(false);
+    }
+  };
+  const formik = useFormik({
+    initialValues,
+    validationSchema,
+    onSubmit: handleVerify,
+  })
+
+  return (
+    <div className="flex items-center justify-center h-screen bg-gray-100">
       <form
         onSubmit={formik.handleSubmit}
         className="bg-white p-6 rounded shadow w-80"
@@ -81,6 +94,15 @@ const VerifyOTP = () => {
           {formik.isSubmitting ? "Verifying..." : "Verify"}
         </button>
 
+         <button
+          type="button"
+          onClick={handleResend}
+          disabled={resendLoading}
+          className="text-blue-500 mt-3 w-full"
+        >
+          {resendLoading ? "Sending..." : "Resend OTP"}
+        </button>
+
         <p className="text-sm mt-3 text-center">
           Go back to{" "}
           <span
@@ -92,7 +114,7 @@ const VerifyOTP = () => {
         </p>
       </form>
     </div>
-    )
+  )
 }
 
 export default VerifyOTP

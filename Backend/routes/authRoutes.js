@@ -10,4 +10,6 @@ router.post("/verify-otp", AuthController.verifyOTP);
 
 router.post("/login", AuthController.login);
 
+router.post("/resendOTP", AuthController.resendOTP)
+
 module.exports = router;

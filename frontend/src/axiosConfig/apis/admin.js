@@ -2,36 +2,27 @@ import axios from "axios";
 import axiosInstance from "../axios"
 
 class Routes {
-    async handleSignup(data) {
+    async getALLUsers() {
         try {
-            const response = await axiosInstance.post("/auth/signup", data)
+            const response = await axiosInstance.get("/user/getAllUsers")
             return response.data
         } catch (error) {
             console.error("An error occurred:", error);
             throw error;
         }
     }
-    async handleLogin(data) {
+    async updateUsers(id,data) {
         try {
-            const response = await axiosInstance.post("/auth/login", data)
+            const response = await axiosInstance.put(`/user/updateUser/${id}`,data)
             return response.data
         } catch (error) {
             console.error("An error occurred:", error);
             throw error;
         }
     }
-    async verifyOtp(data) {
+    async deleteUsers(id,data){
         try {
-            const response = await axiosInstance.post("/auth/verify-otp", data)
-            return response.data
-        } catch (error) {
-            console.error("An error occurred:", error);
-            throw error;
-        }
-    }
-    async resenddOtp(data) {
-        try {
-            const response = await axiosInstance.post("/auth/resendOTP", data)
+            const response = await axiosInstance.delete(`/user/deleteUser/${id}`)
             return response.data
         } catch (error) {
             console.error("An error occurred:", error);
