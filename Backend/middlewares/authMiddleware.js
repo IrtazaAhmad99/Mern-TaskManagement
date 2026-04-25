@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/users")
-const ENV = require ("../Helper/ENV/environment.js")
+const ENV = require("../environment.js")
 
 exports.protectedRoutes = async (req, res, next) => {
   try {
