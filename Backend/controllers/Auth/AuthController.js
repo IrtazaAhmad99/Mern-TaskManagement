@@ -83,14 +83,14 @@ const AuthController = {
                 return res.status(400).json({ message: "User already verified" });
             }
 
-           
+
             if (user.otp !== otp) {
                 return res.status(400).json({ message: "Invalid OTP" });
             }
 
-           
+
             if (user.otpExpiry < Date.now()) {
-                return res.status(400).json({ message: "OTP expired" });
+                return res.status(400).json({ message: "OTP expired please resend OTP" });
             }
 
             user.isVerified = true;
@@ -109,7 +109,36 @@ const AuthController = {
         }
     },
 
-   async login(req, res) {
+    async resendOTP(req, res) {
+        try {
+            const { email } = req.body;
+
+            const user = await User.findOne({ email });
+
+            if (!user) {
+                return res.status(400).json({ message: "User not found" });
+            }
+
+            const otp = Math.floor(100000 + Math.random() * 900000).toString();
+
+         
+            await sendOtpEmail(user.email, user.name, otp);
+
+            user.otp = otp;
+            user.otpExpires = Date.now() + 10 * 60 * 1000;
+
+            await user.save();
+
+            return res.status(200).json({
+                message: "OTP resent successfully",
+            });
+        } catch (error) {
+            return res.status(500).json({ message: error.message });
+        }
+
+    },
+
+    async login(req, res) {
         try {
             const { email, password } = req.body;
 
@@ -123,12 +152,12 @@ const AuthController = {
                 return res.status(400).json({ message: "Invalid credentials" });
             }
 
-          
+
             if (!user.isVerified) {
                 return res.status(400).json({ message: "Please verify your email first" });
             }
 
-       
+
             const isMatch = await bcrypt.compare(password, user.password);
 
             if (!isMatch) {
@@ -154,4 +183,4 @@ const AuthController = {
         }
     }
 }
-module.exports= AuthController
+module.exports = AuthController
