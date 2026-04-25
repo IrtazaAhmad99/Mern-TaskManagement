@@ -49,7 +49,7 @@ const TaskController = {
                 return res.status(404).json({ message: "Task not found" });
             }
 
-            // ownership check
+           
             if (task.user.toString() !== req.user._id.toString()) {
                 return res.status(403).json({ message: "Not authorized" });
             }
@@ -71,7 +71,6 @@ const TaskController = {
                 { new: true }
             );
 
-            // SOCKET.IO
             req.io?.emit("task-updated", updatedTask);
 
             return res.status(200).json({
@@ -92,14 +91,14 @@ const TaskController = {
                 return res.status(404).json({ message: "Task not found" });
             }
 
-            // ownership check
+           
             if (task.user.toString() !== req.user._id.toString()) {
                 return res.status(403).json({ message: "Not authorized" });
             }
 
             await task.deleteOne();
 
-            // SOCKET.IO
+        
             req.io?.emit("task-deleted", { id: req.params.id });
 
             return res.status(200).json({
@@ -118,7 +117,6 @@ const TaskController = {
 
             let filter = { user: req.user._id };
 
-            // optional filter by status
             if (status) {
                 filter.status = status;
             }
@@ -143,7 +141,6 @@ const TaskController = {
                 return res.status(404).json({ message: "Task not found" });
             }
 
-            // ownership check
             if (task.user.toString() !== req.user._id.toString()) {
                 return res.status(403).json({ message: "Not authorized" });
             }

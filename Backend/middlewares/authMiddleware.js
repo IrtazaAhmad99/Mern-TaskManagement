@@ -1,15 +1,16 @@
 const jwt = require("jsonwebtoken");
-const User= require("../models/users")
+const User = require("../models/users")
+const ENV = require ("../Helper/ENV/environment.js")
 
-exports.protectedRoutes = async (req,res,next)=>{
-try {
+exports.protectedRoutes = async (req, res, next) => {
+  try {
     const token = req.headers.authorization?.split(" ")[1];
 
     if (!token) {
       return res.status(401).json({ message: "Not authorized" });
     }
 
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const decoded = jwt.verify(token, ENV.JWT_SECRET);
 
     req.user = await User.findById(decoded.id).select("-password");
 

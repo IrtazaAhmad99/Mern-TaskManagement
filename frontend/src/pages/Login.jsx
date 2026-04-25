@@ -19,14 +19,15 @@ const Login = () => {
   });
   const [loading, setLoading] = useState(false);
 
-  const handlelogin = async () => {
+  const handlelogin = async (values) => {
     try {
       setLoading(true);
 
-      const res = await AuthAPI.handleLogin("/auth/login", form);
-      localStorage.setItem("token", res.data.token);
+      const res = await AuthAPI.handleLogin( values);
+      localStorage.setItem("token", res?.token);
+      localStorage.setItem("user", JSON.stringify(res?.user));
 
-      if (res.data.user.role === "admin") {
+      if (res?.user?.role === "admin") {
         navigate("/users");
       } else {
         navigate("/dashboard");

@@ -14,15 +14,14 @@ dotenv.config();
 
 
 const app = express();
+app.use(cors());
+app.use(express.json());
 const server = Http.createServer(app)
 const io = new Server(server, {
     cors:{
         origin: "*",
     },
 })
-
-app.use(cors());
-app.use(express.json());
 
 app.use((req,res,next)=>{
     req.io=io;
